@@ -27,6 +27,3 @@ We sit,<br>
 Held by being,<br>
 Carried along by this fragile vessel,<br>
 Keeping company.
-
-<script data-goatcounter="https://yetiquatch.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>

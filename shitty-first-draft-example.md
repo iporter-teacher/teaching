@@ -1,5 +1,7 @@
 # Example of Ian's shitty first draft
 
+This is a poem I wrote one day quickly without much thought. I share it to show you that we all have shitty first drafts. :)
+
 Sometimes I wish things could just be,<br>
 like those quiet intimate moments between flower and bee,<br>
 like a sun-baked hound in the yard of its domicile.<br> 

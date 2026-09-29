@@ -1,4 +1,4 @@
-# Untitled Poem 5-21-26
+# Example of Ian's shitty first draft
 
 Sometimes I wish things could just be,<br>
 like those quiet intimate moments between flower and bee,<br>

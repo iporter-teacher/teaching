@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4 sm:px-6">
+  <main class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-xl shadow-sm p-6 sm:p-10 space-y-6">
+    <header class="space-y-3">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+        Assignment Submission Checklist (Assignment Specifications)
+      </h1>
+      <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+        Assignment specifications describe what you need to do to earn credit for the assignment. Use this checklist to help you understand the assignment expectations.
+      </p>
+    </header>
+
+    <div id="checklist-container" class="space-y-4">
+      
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-0" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-0" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Compose a short essay of approximately 300-400 words
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-1" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-1" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          State a main claim (or thesis) for a non-expert audience about the role of curiosity in academic performance
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-2" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-2" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Introduce an academic source in your writing by using the author’s full name, their title (e.g. "Professor of Psychology at University of X"), and the title of the source
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-3" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-3" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Summarize briefly the research described in the academic source in your own words (one to two sentences)
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-4" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-4" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Paraphrase or quote a sentence from an academic source
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-5" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-5" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Include a well-formatted in-text citation in the sentence where you quoted the source
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-6" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-6" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Explain the significance of a passage in jargon-free language for a non-expert audience
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-7" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-7" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Connect these insights to your own experiences with curiosity and academic performance
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-8" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-8" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Include a Works Cited section at the end of the composition with the full MLA citation for the source.
+        </label>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <input type="checkbox" id="item-9" class="checklist-item mt-1 h-5 w-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer shrink-0">
+        <label for="item-9" class="cursor-pointer text-sm sm:text-base leading-relaxed select-none transition-colors">
+          Include an Authenticity Statement in the document in which you state something like (in your own words): "This document represents my own authentic work without the assistance of generative AI." If you would like, you can also provide specific details about what tools you did use (e.g., a dictionary, thesaurus, search engine for X, etc.).
+        </label>
+      </div>
+
+    </div>
+
+    <div class="pt-4 border-t border-slate-100 flex justify-end">
+      <button 
+        type="button" 
+        id="reset-btn" 
+        class="text-xs text-slate-400 hover:text-slate-600 transition-colors p-1"
+        aria-label="Clear checklist"
+      >
+        Clear
+      </button>
+    </div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'academic_essay_checklist_state';
+    const checkboxes = document.querySelectorAll('.checklist-item');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function updateLabelStyle(checkbox) {
+      const label = document.querySelector(`label[for="${checkbox.id}"]`);
+      if (!label) return;
+      if (checkbox.checked) {
+        label.classList.add('text-slate-400', 'line-through');
+        label.classList.remove('text-slate-800');
+      } else {
+        label.classList.remove('text-slate-400', 'line-through');
+        label.classList.add('text-slate-800');
+      }
+    }
+
+    function saveState() {
+      const state = {};
+      checkboxes.forEach((cb) => {
+        state[cb.id] = cb.checked;
+      });
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        // Fallback if localStorage is disabled or unavailable
+      }
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const state = JSON.parse(raw);
+          checkboxes.forEach((cb) => {
+            if (state[cb.id] !== undefined) {
+              cb.checked = Boolean(state[cb.id]);
+            }
+            updateLabelStyle(cb);
+          });
+          return;
+        }
+      } catch (e) {
+        // Ignore JSON or access errors
+      }
+      checkboxes.forEach(updateLabelStyle);
+    }
+
+    checkboxes.forEach((cb) => {
+      cb.addEventListener('change', () => {
+        updateLabelStyle(cb);
+        saveState();
+      });
+    });
+
+    resetBtn.addEventListener('click', () => {
+      checkboxes.forEach((cb) => {
+        cb.checked = false;
+        updateLabelStyle(cb);
+      });
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {
+        // Ignore storage errors
+      }
+    });
+
+    loadState();
+  </script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +9,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4 sm:px-6">
-  <main class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-xl shadow-sm p-6 sm:p-10 space-y-6">
+   <main class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-xl shadow-sm p-6 sm:p-10 space-y-6">
     <header class="space-y-3">
       <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Assignment Submission Checklist (Assignment Specifications)</h1>
       <p class="text-slate-600 text-sm sm:text-base leading-relaxed">Assignment specifications describe what you need to do to earn credit for the assignment. Use this checklist to help you understand the assignment expectations.</p>
@@ -72,8 +76,9 @@
     </div>
   </main>
 
+
   <script>
-    const STORAGE_KEY = 'professional_letter_checklist_state';
+    const STORAGE_KEY = 'narrative_essay_checklist_state';
     const checkboxes = document.querySelectorAll('.checklist-item');
     const resetBtn = document.getElementById('reset-btn');
 
@@ -91,9 +96,14 @@
 
     function saveState() {
       const state = {};
-      checkboxes.forEach(cb => { state[cb.id] = cb.checked; });
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-      catch (e) { /* Storage may be unavailable. */ }
+      checkboxes.forEach((cb) => {
+        state[cb.id] = cb.checked;
+      });
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        // Fallback if localStorage is unavailable
+      }
     }
 
     function loadState() {
@@ -101,15 +111,21 @@
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
           const state = JSON.parse(raw);
-          checkboxes.forEach(cb => {
-            if (state[cb.id] !== undefined) cb.checked = Boolean(state[cb.id]);
+          checkboxes.forEach((cb) => {
+            if (state[cb.id] !== undefined) {
+              cb.checked = Boolean(state[cb.id]);
+            }
+            updateLabelStyle(cb);
           });
+          return;
         }
-      } catch (e) { /* Ignore storage errors. */ }
+      } catch (e) {
+        // Ignore storage access errors
+      }
       checkboxes.forEach(updateLabelStyle);
     }
 
-    checkboxes.forEach(cb => {
+    checkboxes.forEach((cb) => {
       cb.addEventListener('change', () => {
         updateLabelStyle(cb);
         saveState();
@@ -117,15 +133,19 @@
     });
 
     resetBtn.addEventListener('click', () => {
-      checkboxes.forEach(cb => {
+      checkboxes.forEach((cb) => {
         cb.checked = false;
         updateLabelStyle(cb);
       });
-      try { localStorage.removeItem(STORAGE_KEY); }
-      catch (e) { /* Ignore storage errors. */ }
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {
+        // Ignore storage errors
+      }
     });
 
     loadState();
   </script>
 </body>
 </html>
+

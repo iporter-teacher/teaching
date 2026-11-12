@@ -15,6 +15,12 @@
 ## Micro-Comp 5 Assignment Checklist
 [Micro-Comp 5 Assignment Checklist](micro-comp-5-checklist.html)
 
+## Micro-Comp 6 Assignment Checklist
+[Micro-Comp 6 Assignment Checklist](micro-comp-6-checklist.html)
+
+## Micro-Comp 7 Assignment Checklist
+[Micro-Comp 7 Assignment Checklist](micro-comp-7-checklist.html)
+
 ## Shitty First Draft
 [Example of a Shitty First Draft](shitty-first-draft-example.md)
 

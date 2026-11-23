@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Dimensions of Curiosity — Self-Assessment</title>
+  <!-- Load Tailwind CSS for responsive, modern academic styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Load Inter font for clean legibility -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#4f46e5',
+              600: '#4338ca',
+              700: '#3730a3',
+              900: '#1e1b4b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom transitions, focus outlines, and print styles */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Highlight animation for unanswered items when user clicks Calculate early */
+    @keyframes pulseBorder {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.35); }
+      50% { box-shadow: 0 0 0 6px rgba(225, 29, 72, 0.12); }
+    }
+
+    .unanswered-highlight {
+      border-color: #f43f5e !important;
+      background-color: #fff1f2 !important;
+      animation: pulseBorder 1.4s ease-in-out 2;
+    }
+
+    /* Clean Print / PDF stylesheet for student submissions */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 11pt;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break-avoid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .shadow-sm, .shadow-md, .shadow-lg {
+        box-shadow: none !important;
+      }
+      #results-section {
+        display: block !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- Top Header Banner -->
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold uppercase tracking-wider mb-3">
+        <span>Self-Assessment Instrument</span>
+        <span aria-hidden="true">&bull;</span>
+        <span>25 Items</span>
+      </div>
+      <h1 class="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+        Five Dimensions of Curiosity
+      </h1>
+      <p class="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
+        What makes one person more curious than another? Rather than regard curiosity as a single trait, we can break it down into five distinct dimensions. Instead of asking, <em class="text-slate-800 font-medium">&ldquo;How curious are you?&rdquo;</em> we can ask, <em class="text-slate-800 font-medium">&ldquo;How are you curious?&rdquo;</em>
+      </p>
+    </div>
+  </header>
+
+  <!-- Sticky Rating Scale Legend & Live Progress Bar -->
+  <div class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm no-print">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2.5">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">
+          Table 1: How Are You Curious? &mdash; Rating Scale (1&ndash;7)
+        </span>
+        <div class="flex items-center gap-3">
+          <span id="progress-text" class="text-xs font-semibold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-full">
+            0 / 25 answered
+          </span>
+        </div>
+      </div>
+
+      <!-- 7-Point Scale Reference Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-1.5 text-center">
+        <div class="bg-slate-100 rounded-lg px-2 py-1.5 border border-slate-200/70">
+          <span class="block text-xs font-bold text-slate-900">1</span>
+          <span class="block text-[11px] leading-tight text-slate-600">Does not describe me at all</span>
+        </div>
+        <div class="bg-slate-100 rounded-lg px-2 py-1.5 border border-slate-200/70">
+          <span class="block text-xs font-bold text-slate-900">2</span>
+          <span class="block text-[11px] leading-tight text-slate-600">Barely describes me</span>
+        </div>
+        <div class="bg-slate-100 rounded-lg px-2 py-1.5 border border-slate-200/70">
+          <span class="block text-xs font-bold text-slate-900">3</span>
+          <span class="block text-[11px] leading-tight text-slate-600">Somewhat describes me</span>
+        </div>
+        <div class="bg-slate-100 rounded-lg px-2 py-1.5 border border-slate-200/70">
+          <span class="block text-xs font-bold text-slate-900">4</span>
+          <span class="block text-[11px] leading-tight text-slate-600">Neutral</span>
+        </div>
+        <div class="bg-slate-100 rounded-lg px-2 py-1.5 border border-slate-200/70">
+          <span class="block text-xs font-bold text-slate-900">5</span>
+          <span class="block text-[11px] leading-tight text-slate-600">Generally describes me</span>
+        </div>
+        <div class="bg-slate-100 rounded-lg px-2 py-1.5 border border-slate-200/70">
+          <span class="block text-xs font-bold text-slate-900">6</span>
+          <span class="block text-[11px] leading-tight text-slate-600">Mostly describes me</span>
+        </div>
+        <div class="col-span-2 sm:col-span-1 bg-slate-100 rounded-lg px-2 py-1.5 border border-slate-200/70">
+          <span class="block text-xs font-bold text-slate-900">7</span>
+          <span class="block text-[11px] leading-tight text-slate-600">Completely describes me</span>
+        </div>
+      </div>
+
+      <!-- Thin Progress Track -->
+      <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden mt-2.5" role="progressbar" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0" id="progress-bar-container">
+        <div id="progress-bar-fill" class="h-full bg-brand-600 transition-all duration-300 ease-out rounded-full" style="width: 0%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- Survey Instructions Callout -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm no-print">
+      <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+        <strong>Directions:</strong> Use the 1&ndash;7 scale above to indicate the degree to which each of the following 25 statements describes you. Select one number per statement. Your dimension scores and national benchmark comparisons will appear once you complete the survey.
+      </p>
+    </div>
+
+    <!-- Validation / Status Message Banner (Replaces alert) -->
+    <div id="status-banner" class="hidden rounded-xl border p-4 text-sm font-medium transition-all no-print" role="alert"></div>
+
+    <!-- Survey Sections Container (Populated via JS for clean maintainability) -->
+    <form id="curiosity-form" class="space-y-8" novalidate>
+      <div id="survey-sections" class="space-y-8"></div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2 no-print">
+        <button
+          type="button"
+          id="reset-btn"
+          class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-300 bg-white text-slate-700 font-medium text-sm hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 transition cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          Reset Survey
+        </button>
+
+        <button
+          type="submit"
+          id="calculate-btn"
+          class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-brand-600 text-white font-semibold text-sm sm:text-base shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 transition cursor-pointer"
+        >
+          <span>Calculate My Results</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </form>
+
+    <!-- Results Dashboard (Hidden until calculated) -->
+    <section id="results-section" class="hidden bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden scroll-mt-36" aria-live="polite">
+      <!-- Results Header -->
+      <div class="bg-slate-900 text-white px-6 py-6 sm:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-brand-200">Your Curiosity Profile</span>
+          <h2 class="text-xl sm:text-2xl font-bold mt-1">Five Dimensions Results &amp; U.S. Benchmarks</h2>
+          <p id="results-timestamp" class="text-xs text-slate-300 mt-1"></p>
+        </div>
+
+        <!-- Export / Print Buttons -->
+        <div class="flex flex-wrap items-center gap-2.5 no-print">
+          <button
+            type="button"
+            id="copy-summary-btn"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs sm:text-sm font-medium transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-white"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span id="copy-btn-label">Copy Summary for Assignment</span>
+          </button>
+
+          <button
+            type="button"
+            id="print-btn"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs sm:text-sm font-medium transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-300"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            <span>Print / Save as PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="p-6 sm:p-8 space-y-8">
+        <!-- Visual Bar Chart Comparison -->
+        <div class="print-break-avoid">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900">
+              Visual Comparison vs. U.S. National Midpoint
+            </h3>
+            <div class="flex items-center gap-4 text-xs text-slate-600">
+              <span class="inline-flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-sm bg-brand-600 inline-block"></span>
+                Your Score (1.0&ndash;7.0)
+              </span>
+              <span class="inline-flex items-center gap-1.5">
+                <span class="w-0.5 h-3.5 bg-slate-900 inline-block"></span>
+                U.S. Medium Norm (&plusmn;)
+              </span>
+            </div>
+          </div>
+
+          <div id="visual-chart" class="space-y-4 bg-slate-50 rounded-xl p-4 sm:p-6 border border-slate-200/80">
+            <!-- Bars injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Detailed Dimension Score Cards -->
+        <div>
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-4">
+            Dimension Breakdown &amp; Interpretation
+          </h3>
+          <div id="results-cards" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Dimension result cards injected dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scoring Instructions & What Your Score Means Reference Section -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden print-break-avoid">
+      <details id="scoring-reference" open class="group">
+        <summary class="flex items-center justify-between px-6 py-5 cursor-pointer select-none bg-slate-50/70 hover:bg-slate-100/70 transition list-none">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900">
+              How Your Score Is Calculated &amp; What It Means
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+              Scoring methodology, reverse-scoring rules, and U.S. nationally representative benchmarks
+            </p>
+          </div>
+          <span class="ml-4 p-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 group-open:rotate-180 transition-transform no-print">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </summary>
+
+        <div class="p-6 sm:p-8 border-t border-slate-200 space-y-6 text-sm text-slate-700 leading-relaxed">
+          <!-- Scoring Instructions -->
+          <div>
+            <h3 class="font-bold text-slate-900 text-base mb-2">Scoring Instructions</h3>
+            <p>
+              Compute the average score (mean of the 5 items) for each dimension. <strong>Reverse-score the items under Stress Tolerance</strong> (<code class="px-1.5 py-0.5 bg-slate-100 rounded text-slate-800 font-mono text-xs">1 = 7, 2 = 6, 3 = 5, 4 = 4, 5 = 3, 6 = 2, 7 = 1</code>) so that higher scores reflect greater tolerance for stress and uncertainty. By comparing your results with those of a nationally representative sample of people in the United States, you can determine whether you are <strong>Low</strong>, <strong>Medium</strong>, or <strong>High</strong> on each dimension.
+            </p>
+          </div>
+
+          <!-- What Your Score Means Table -->
+          <div>
+            <h3 class="font-bold text-slate-900 text-base mb-3">What Your Score Means (U.S. Representative Benchmarks)</h3>
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                <thead class="bg-slate-50 text-slate-700 font-semibold">
+                  <tr>
+                    <th scope="col" class="px-4 py-3">Curiosity Dimension</th>
+                    <th scope="col" class="px-4 py-3">Low</th>
+                    <th scope="col" class="px-4 py-3">Medium (U.S. Norm)</th>
+                    <th scope="col" class="px-4 py-3">High</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 bg-white">
+                  <tr>
+                    <td class="px-4 py-3 font-medium text-slate-900">Deprivation Sensitivity</td>
+                    <td class="px-4 py-3 text-slate-600">Less than 3.7</td>
+                    <td class="px-4 py-3 text-slate-600">&plusmn; 4.9 <span class="text-xs text-slate-400">(3.7 &ndash; 6.0)</span></td>
+                    <td class="px-4 py-3 text-slate-600">Greater than 6.0</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-medium text-slate-900">Joyous Exploration</td>
+                    <td class="px-4 py-3 text-slate-600">Less than 4.1</td>
+                    <td class="px-4 py-3 text-slate-600">&plusmn; 5.2 <span class="text-xs text-slate-400">(4.1 &ndash; 6.3)</span></td>
+                    <td class="px-4 py-3 text-slate-600">Greater than 6.3</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-medium text-slate-900">Social Curiosity</td>
+                    <td class="px-4 py-3 text-slate-600">Less than 3.0</td>
+                    <td class="px-4 py-3 text-slate-600">&plusmn; 4.4 <span class="text-xs text-slate-400">(3.0 &ndash; 5.8)</span></td>
+                    <td class="px-4 py-3 text-slate-600">Greater than 5.8</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-medium text-slate-900">Stress Tolerance <span class="text-xs font-normal text-slate-500">(reverse-scored)</span></td>
+                    <td class="px-4 py-3 text-slate-600">Less than 3.1</td>
+                    <td class="px-4 py-3 text-slate-600">&plusmn; 4.4 <span class="text-xs text-slate-400">(3.1 &ndash; 5.8)</span></td>
+                    <td class="px-4 py-3 text-slate-600">Greater than 5.8</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-medium text-slate-900">Thrill-Seeking</td>
+                    <td class="px-4 py-3 text-slate-600">Less than 2.6</td>
+                    <td class="px-4 py-3 text-slate-600">&plusmn; 3.9 <span class="text-xs text-slate-400">(2.6 &ndash; 5.2)</span></td>
+                    <td class="px-4 py-3 text-slate-600">Greater than 5.2</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- Subtle Footer -->
+  <footer class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-xs text-slate-400 no-print">
+    Based on the Five-Dimensional Curiosity Scale (Kashdan et al.). All calculations run locally in your browser; no personal data is stored or transmitted.
+  </footer>
+
+  <!-- Hidden textarea fallback for reliable clipboard copy inside Canvas LMS iframes -->
+  <textarea id="clipboard-fallback" class="sr-only" aria-hidden="true" tabindex="-1"></textarea>
+
+  <script>
+    /**
+     * Five Dimensions of Curiosity — Survey Data & Scoring Logic
+     * All 25 statements, reverse-scoring rules, and U.S. benchmark cutoffs.
+     */
+    const SCALE_LABELS = {
+      1: '1 — Does not describe me at all',
+      2: '2 — Barely describes me',
+      3: '3 — Somewhat describes me',
+      4: '4 — Neutral',
+      5: '5 — Generally describes me',
+      6: '6 — Mostly describes me',
+      7: '7 — Completely describes me'
+    };
+
+    const DIMENSIONS = [
+      {
+        id: 'deprivation',
+        title: 'Deprivation Sensitivity',
+        subtitle: 'Recognizing a gap in knowledge and feeling driven to resolve the tension of not knowing.',
+        reverseScored: false,
+        lowMax: 3.7,       // Low: < 3.7
+        highMin: 6.0,      // High: > 6.0
+        normMid: 4.9,      // Medium: ± 4.9
+        benchmarkText: 'Low: < 3.7 | Medium: ± 4.9 | High: > 6.0',
+        items: [
+          { num: 1, text: 'Thinking about solutions to difficult conceptual problems can keep me awake at night.' },
+          { num: 2, text: "I can spend hours on a single problem because I just can't rest without knowing the answer." },
+          { num: 3, text: "I feel frustrated if I can't figure out the solution to a problem, so I work even harder to solve it." },
+          { num: 4, text: 'I work relentlessly at problems that I feel must be solved.' },
+          { num: 5, text: 'It frustrates me to not have all the information I need.' }
+        ]
+      },
+      {
+        id: 'joyous',
+        title: 'Joyous Exploration',
+        subtitle: 'Being consumed with wonder about the fascination of new information and learning opportunities.',
+        reverseScored: false,
+        lowMax: 4.1,       // Low: < 4.1
+        highMin: 6.3,      // High: > 6.3
+        normMid: 5.2,      // Medium: ± 5.2
+        benchmarkText: 'Low: < 4.1 | Medium: ± 5.2 | High: > 6.3',
+        items: [
+          { num: 6, text: 'I view challenging situations as an opportunity to grow and learn.' },
+          { num: 7, text: 'I am always looking for experiences that challenge how I think about myself and the world.' },
+          { num: 8, text: 'I seek out situations where it is likely that I will have to think in depth about something.' },
+          { num: 9, text: 'I enjoy learning about subjects that are unfamiliar to me.' },
+          { num: 10, text: 'I find it fascinating to learn new information.' }
+        ]
+      },
+      {
+        id: 'social',
+        title: 'Social Curiosity',
+        subtitle: 'Wanting to know what other people are thinking, feeling, and doing through observation and conversation.',
+        reverseScored: false,
+        lowMax: 3.0,       // Low: < 3.0
+        highMin: 5.8,      // High: > 5.8
+        normMid: 4.4,      // Medium: ± 4.4
+        benchmarkText: 'Low: < 3.0 | Medium: ± 4.4 | High: > 5.8',
+        items: [
+          { num: 11, text: 'I like to learn about the habits of others.' },
+          { num: 12, text: 'I like finding out why people behave the way they do.' },
+          { num: 13, text: "When other people are having a conversation, I like to find out what it's about." },
+          { num: 14, text: 'When around other people, I like listening to their conversations.' },
+          { num: 15, text: "When people quarrel, I like to know what's going on." }
+        ]
+      },
+      {
+        id: 'stress',
+        title: 'Stress Tolerance',
+        subtitle: 'Willingness to embrace the doubt, confusion, and anxiety that arise from new or uncertain situations.',
+        reverseScored: true, // Reverse-scored transparently upon calculation (8 - raw)
+        lowMax: 3.1,       // Low: < 3.1
+        highMin: 5.8,      // High: > 5.8
+        normMid: 4.4,      // Medium: ± 4.4
+        benchmarkText: 'Low: < 3.1 | Medium: ± 4.4 | High: > 5.8',
+        items: [
+          { num: 16, text: 'The smallest doubt can stop me from seeking out new experiences.' },
+          { num: 17, text: 'I cannot handle the stress that comes from entering uncertain situations.' },
+          { num: 18, text: 'I find it hard to explore new places when I lack confidence in my abilities.' },
+          { num: 19, text: 'I cannot function well if I am unsure whether a new experience is safe.' },
+          { num: 20, text: 'It is difficult to concentrate when there is a possibility that I will be taken by surprise.' }
+        ]
+      },
+      {
+        id: 'thrill',
+        title: 'Thrill-Seeking',
+        subtitle: 'Willingness to take physical, social, and financial risks to acquire varied, novel, and intense experiences.',
+        reverseScored: false,
+        lowMax: 2.6,       // Low: < 2.6
+        highMin: 5.2,      // High: > 5.2
+        normMid: 3.9,      // Medium: ± 3.9
+        benchmarkText: 'Low: < 2.6 | Medium: ± 3.9 | High: > 5.2',
+        items: [
+          { num: 21, text: 'The anxiety of doing something new makes me feel excited and alive.' },
+          { num: 22, text: 'Risk-taking is exciting to me.' },
+          { num: 23, text: 'When I have free time, I want to do things that are a little scary.' },
+          { num: 24, text: 'Creating an adventure as I go is much more appealing than a planned adventure.' },
+          { num: 25, text: 'I prefer friends who are excitingly unpredictable.' }
+        ]
+      }
+    ];
+
+    // State object storing responses keyed by item number (1..25)
+    const responses = {};
+    let latestCalculatedResults = null;
+
+    /**
+     * Build the 5 survey section cards and 25 interactive rows.
+     */
+    function renderSurvey() {
+      const container = document.getElementById('survey-sections');
+      container.innerHTML = '';
+
+      DIMENSIONS.forEach((dim, dimIndex) => {
+        const sectionEl = document.createElement('section');
+        sectionEl.className = 'bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden';
+        sectionEl.setAttribute('aria-labelledby', `heading-${dim.id}`);
+
+        // Section Header
+        const headerHTML = `
+          <div class="bg-slate-50/90 border-b border-slate-200 px-5 sm:px-7 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-brand-100 text-brand-700 text-xs font-bold">
+                  ${dimIndex + 1}
+                </span>
+                <h2 id="heading-${dim.id}" class="text-lg font-bold text-slate-900">
+                  ${dim.title}
+                </h2>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">${dim.subtitle}</p>
+            </div>
+            <div class="self-start sm:self-center">
+              <span id="badge-${dim.id}" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-200/80 text-slate-600">
+                0 / 5 completed
+              </span>
+            </div>
+          </div>
+        `;
+
+        // Items List
+        const itemsWrapper = document.createElement('div');
+        itemsWrapper.className = 'divide-y divide-slate-100';
+
+        dim.items.forEach((item) => {
+          const row = document.createElement('div');
+          row.id = `item-row-${item.num}`;
+          row.className = 'p-5 sm:px-7 sm:py-5 transition-colors hover:bg-slate-50/60 border-l-4 border-transparent';
+
+          // Generate 1-7 radio pills
+          let pillsHTML = '';
+          for (let val = 1; val <= 7; val++) {
+            const inputId = `q${item.num}_opt${val}`;
+            pillsHTML += `
+              <label
+                for="${inputId}"
+                title="${SCALE_LABELS[val]}"
+                class="relative flex-1 sm:flex-initial cursor-pointer select-none"
+              >
+                <input
+                  type="radio"
+                  id="${inputId}"
+                  name="q${item.num}"
+                  value="${val}"
+                  data-item="${item.num}"
+                  data-dim="${dim.id}"
+                  class="peer sr-only"
+                />
+                <span class="flex items-center justify-center w-full sm:w-10 h-10 rounded-xl border border-slate-300 bg-white text-sm font-semibold text-slate-700 transition-all
+                  hover:border-brand-400 hover:bg-brand-50/50
+                  peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500 peer-focus-visible:ring-offset-1
+                  peer-checked:bg-brand-600 peer-checked:border-brand-600 peer-checked:text-white peer-checked:shadow-sm">
+                  ${val}
+                </span>
+              </label>
+            `;
+          }
+
+          row.innerHTML = `
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div class="flex items-start gap-3 max-w-xl">
+                <span class="text-xs font-bold text-slate-400 mt-1 w-5 shrink-0">${item.num}.</span>
+                <p class="text-sm sm:text-[15px] text-slate-800 leading-relaxed">${item.text}</p>
+              </div>
+
+              <div class="flex flex-col items-stretch sm:items-end shrink-0">
+                <div class="flex items-center gap-1.5 sm:gap-2" role="radiogroup" aria-label="Statement ${item.num}">
+                  ${pillsHTML}
+                </div>
+                <div class="flex justify-between w-full text-[10px] font-medium text-slate-400 mt-1.5 px-0.5">
+                  <span>Does not describe</span>
+                  <span>Completely describes</span>
+                </div>
+              </div>
+            </div>
+          `;
+
+          itemsWrapper.appendChild(row);
+        });
+
+        sectionEl.innerHTML = headerHTML;
+        sectionEl.appendChild(itemsWrapper);
+        container.appendChild(sectionEl);
+      });
+    }
+
+    /**
+     * Handle radio selection changes, update progress counters, and auto-update results if all 25 are answered.
+     */
+    function handleInputChange(event) {
+      const target = event.target;
+      if (!target || target.type !== 'radio') return;
+
+      const itemNum = parseInt(target.dataset.item, 10);
+      const val = parseInt(target.value, 10);
+      responses[itemNum] = val;
+
+      // Remove unanswered highlight if present
+      const row = document.getElementById(`item-row-${itemNum}`);
+      if (row) {
+        row.classList.remove('unanswered-highlight');
+      }
+
+      updateProgressUI();
+
+      // Hide warning banner if all items are now answered
+      const answeredCount = Object.keys(responses).length;
+      if (answeredCount === 25) {
+        hideStatusBanner();
+        calculateAndDisplayResults(false);
+      } else if (!document.getElementById('results-section').classList.contains('hidden')) {
+        // Keep results live if user already calculated and is adjusting answers
+        calculateAndDisplayResults(false);
+      }
+    }
+
+    /**
+     * Update global progress bar and per-dimension completion badges.
+     */
+    function updateProgressUI() {
+      const totalAnswered = Object.keys(responses).length;
+      const pct = Math.round((totalAnswered / 25) * 100);
+
+      document.getElementById('progress-text').textContent = `${totalAnswered} / 25 answered`;
+      const fill = document.getElementById('progress-bar-fill');
+      const container = document.getElementById('progress-bar-container');
+      fill.style.width = `${pct}%`;
+      container.setAttribute('aria-valuenow', totalAnswered);
+
+      // Update each dimension's badge
+      DIMENSIONS.forEach((dim) => {
+        const badge = document.getElementById(`badge-${dim.id}`);
+        let dimAnswered = 0;
+        let dimSum = 0;
+
+        dim.items.forEach((item) => {
+          if (responses[item.num] !== undefined) {
+            dimAnswered++;
+            const raw = responses[item.num];
+            dimSum += dim.reverseScored ? (8 - raw) : raw;
+          }
+        });
+
+        if (dimAnswered === 5) {
+          const avg = (dimSum / 5).toFixed(2);
+          badge.className = 'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800';
+          badge.textContent = `5 / 5 completed • Avg: ${avg}`;
+        } else {
+          badge.className = 'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-200/80 text-slate-600';
+          badge.textContent = `${dimAnswered} / 5 completed`;
+        }
+      });
+    }
+
+    /**
+     * Classify a dimension mean score into Low, Medium, or High based on exact cutoffs.
+     */
+    function classifyScore(dim, avg) {
+      // Round to 2 decimals for clean threshold comparisons
+      const score = Number(avg.toFixed(2));
+      if (score < dim.lowMax) {
+        return {
+          level: 'Low',
+          badgeClass: 'bg-amber-100 text-amber-800 border-amber-200',
+          barClass: 'bg-amber-500',
+          note: `Below the U.S. medium range (< ${dim.lowMax.toFixed(1)})`
+        };
+      } else if (score > dim.highMin) {
+        return {
+          level: 'High',
+          badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+          barClass: 'bg-emerald-600',
+          note: `Above the U.S. medium range (> ${dim.highMin.toFixed(1)})`
+        };
+      } else {
+        return {
+          level: 'Medium',
+          badgeClass: 'bg-brand-100 text-brand-800 border-brand-200',
+          barClass: 'bg-brand-600',
+          note: `Within the typical U.S. range (± ${dim.normMid.toFixed(1)})`
+        };
+      }
+    }
+
+    /**
+     * Validate completion, compute all 5 dimension averages, and render the results dashboard.
+     */
+    function calculateAndDisplayResults(shouldScroll = true) {
+      const missingItems = [];
+      DIMENSIONS.forEach((dim) => {
+        dim.items.forEach((item) => {
+          const row = document.getElementById(`item-row-${item.num}`);
+          if (responses[item.num] === undefined) {
+            missingItems.push(item.num);
+            if (shouldScroll && row) {
+              row.classList.remove('unanswered-highlight');
+              // Trigger reflow so animation restarts cleanly
+              void row.offsetWidth;
+              row.classList.add('unanswered-highlight');
+            }
+          }
+        });
+      });
+
+      if (missingItems.length > 0) {
+        if (shouldScroll) {
+          showStatusBanner(
+            `Please answer all 25 statements before calculating your results. Remaining item${missingItems.length > 1 ? 's' : ''}: #${missingItems.join(', #')}.`,
+            'error'
+          );
+          const firstMissingEl = document.getElementById(`item-row-${missingItems[0]}`);
+          if (firstMissingEl) {
+            firstMissingEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+        return;
+      }
+
+      hideStatusBanner();
+
+      // Compute dimension results
+      const computed = DIMENSIONS.map((dim) => {
+        const itemScores = dim.items.map((item) => {
+          const raw = responses[item.num];
+          return dim.reverseScored ? (8 - raw) : raw;
+        });
+        const total = itemScores.reduce((acc, val) => acc + val, 0);
+        const avg = total / dim.items.length;
+        const classification = classifyScore(dim, avg);
+
+        return {
+          ...dim,
+          total,
+          avg,
+          avgFormatted: avg.toFixed(2),
+          classification
+        };
+      });
+
+      latestCalculatedResults = computed;
+      renderResultsDashboard(computed);
+
+      const resultsSection = document.getElementById('results-section');
+      resultsSection.classList.remove('hidden');
+
+      if (shouldScroll) {
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    /**
+     * Render visual bar chart and detailed breakdown cards inside #results-section.
+     */
+    function renderResultsDashboard(computed) {
+      const timestampEl = document.getElementById('results-timestamp');
+      const now = new Date();
+      timestampEl.textContent = `Completed on ${now.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`;
+
+      const chartContainer = document.getElementById('visual-chart');
+      const cardsContainer = document.getElementById('results-cards');
+      chartContainer.innerHTML = '';
+      cardsContainer.innerHTML = '';
+
+      computed.forEach((res) => {
+        // Scale 1.0..7.0 to 0%..100% bar width
+        const scorePct = Math.max(0, Math.min(100, ((res.avg - 1) / 6) * 100));
+        const normPct = Math.max(0, Math.min(100, ((res.normMid - 1) / 6) * 100));
+
+        // 1. Visual Chart Row
+        const barRow = document.createElement('div');
+        barRow.className = 'space-y-1.5';
+        barRow.innerHTML = `
+          <div class="flex items-center justify-between text-xs sm:text-sm">
+            <span class="font-semibold text-slate-800">${res.title}</span>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-slate-900">${res.avgFormatted} <span class="text-slate-400 font-normal">/ 7.00</span></span>
+              <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold border ${res.classification.badgeClass}">
+                ${res.classification.level}
+              </span>
+            </div>
+          </div>
+
+          <div class="relative h-5 bg-slate-200/90 rounded-lg overflow-visible">
+            <!-- Filled Student Score Bar -->
+            <div
+              class="h-full rounded-lg transition-all duration-500 ${res.classification.barClass}"
+              style="width: ${scorePct}%;"
+            ></div>
+
+            <!-- U.S. National Midpoint Marker -->
+            <div
+              class="absolute top-[-4px] bottom-[-4px] w-0.5 bg-slate-900 z-10"
+              style="left: ${normPct}%;"
+              title="U.S. National Medium Midpoint: ± ${res.normMid.toFixed(1)}"
+            >
+              <span class="absolute -top-5 -translate-x-1/2 text-[10px] font-semibold text-slate-600 whitespace-nowrap">
+                ±${res.normMid.toFixed(1)}
+              </span>
+            </div>
+          </div>
+        `;
+        chartContainer.appendChild(barRow);
+
+        // 2. Detailed Dimension Card
+        const card = document.createElement('div');
+        card.className = 'rounded-xl border border-slate-200 p-5 bg-white flex flex-col justify-between gap-3 print-break-avoid';
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-3">
+              <h4 class="font-bold text-slate-900 text-base">${res.title}</h4>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold border shrink-0 ${res.classification.badgeClass}">
+                ${res.classification.level}
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">${res.subtitle}</p>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-baseline justify-between">
+            <div>
+              <span class="text-2xl font-bold text-slate-900">${res.avgFormatted}</span>
+              <span class="text-xs text-slate-500 ml-1">average (Total: ${res.total} / 35)</span>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 rounded-lg px-3 py-2 text-xs text-slate-600 space-y-0.5">
+            <div class="font-medium text-slate-700">${res.classification.note}</div>
+            <div class="text-slate-500">Benchmarks: ${res.benchmarkText}</div>
+          </div>
+        `;
+        cardsContainer.appendChild(card);
+      });
+    }
+
+    /**
+     * Copy a clean plain-text summary of the student's scores to the clipboard.
+     * Uses document.execCommand('copy') fallback to work reliably inside Canvas LMS iframes.
+     */
+    function copySummaryToClipboard() {
+      if (!latestCalculatedResults) return;
+
+      const lines = [
+        'FIVE DIMENSIONS OF CURIOSITY — MY RESULTS',
+        '-----------------------------------------'
+      ];
+
+      latestCalculatedResults.forEach((res) => {
+        lines.push(`${res.title}: ${res.avgFormatted} / 7.00 (${res.classification.level}) [${res.benchmarkText}]`);
+      });
+
+      lines.push('-----------------------------------------');
+      lines.push('Note: Stress Tolerance items were reverse-scored prior to averaging.');
+
+      const summaryText = lines.join('\n');
+      const fallbackTextarea = document.getElementById('clipboard-fallback');
+      fallbackTextarea.value = summaryText;
+      fallbackTextarea.classList.remove('sr-only');
+      fallbackTextarea.select();
+      fallbackTextarea.setSelectionRange(0, 99999);
+
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (err) {
+        copied = false;
+      }
+      fallbackTextarea.classList.add('sr-only');
+
+      const btnLabel = document.getElementById('copy-btn-label');
+      if (copied) {
+        btnLabel.textContent = 'Copied!';
+        setTimeout(() => {
+          btnLabel.textContent = 'Copy Summary for Assignment';
+        }, 2500);
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(summaryText).then(() => {
+          btnLabel.textContent = 'Copied!';
+          setTimeout(() => {
+            btnLabel.textContent = 'Copy Summary for Assignment';
+          }, 2500);
+        });
+      }
+    }
+
+    /**
+     * Reset all radio inputs, clear state, and hide the results dashboard.
+     */
+    function resetSurvey() {
+      Object.keys(responses).forEach((key) => delete responses[key]);
+      latestCalculatedResults = null;
+
+      const form = document.getElementById('curiosity-form');
+      form.reset();
+
+      document.querySelectorAll('.unanswered-highlight').forEach((el) => {
+        el.classList.remove('unanswered-highlight');
+      });
+
+      document.getElementById('results-section').classList.add('hidden');
+      hideStatusBanner();
+      updateProgressUI();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /**
+     * Show/hide inline status alert banner (replaces alert()).
+     */
+    function showStatusBanner(message, type = 'error') {
+      const banner = document.getElementById('status-banner');
+      banner.textContent = message;
+      banner.classList.remove('hidden', 'bg-rose-50', 'border-rose-200', 'text-rose-800', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-800');
+
+      if (type === 'error') {
+        banner.classList.add('bg-rose-50', 'border-rose-200', 'text-rose-800');
+      } else {
+        banner.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-800');
+      }
+    }
+
+    function hideStatusBanner() {
+      const banner = document.getElementById('status-banner');
+      banner.classList.add('hidden');
+    }
+
+    // Initialize application on DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSurvey();
+      updateProgressUI();
+
+      const form = document.getElementById('curiosity-form');
+      form.addEventListener('change', handleInputChange);
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        calculateAndDisplayResults(true);
+      });
+
+      document.getElementById('reset-btn').addEventListener('click', resetSurvey);
+      document.getElementById('copy-summary-btn').addEventListener('click', copySummaryToClipboard);
+      document.getElementById('print-btn').addEventListener('click', () => window.print());
+    });
+  </script>
+</body>
+</html>

@@ -25,6 +25,9 @@
 ### Micro-Comp 8 Assignment Checklist
 [Micro-Comp 8 Assignment Checklist](micro-comp-8-checklist.html)
 
+### Five Dimensions of Curiosity survey
+[Five Dimensions of Curiosity survey](.five-dimensions-curiosity.html)
+
 ### Shitty First Draft
 [Example of a Shitty First Draft](shitty-first-draft-example.md)
 
